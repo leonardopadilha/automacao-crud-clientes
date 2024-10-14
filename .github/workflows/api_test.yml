@@ -1,0 +1,24 @@
+name: 'Execução do teste de api'
+
+on:
+    workflow_dispatch:
+
+jobs:
+    api-tests:
+        runs-on: 'ubuntu-latest'
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+            with:
+              node-version: lts/*
+
+            - name: Instalando dependências do backend
+              run: npm install crud_clientes_node/backend/
+
+            - name: Instalando dependências do frontend
+              run: npm install crud_clientes_node/
+
+            - name: Subindo a aplicação
+              run: node crud_clientes_node/backend/app.js
